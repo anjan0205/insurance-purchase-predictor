@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="AI-powered insurance purchase predictor using machine learning. Predict customer insurance buying behavior with 82.5% accuracy.">
+    <title>InsurAI - Insurance Purchase Predictor</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>">
+</head>
+
+<body>
+    <!-- Animated background particles -->
+    <div class="bg-particles" id="bgParticles"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            <span class="brand-icon">🛡️</span>
+            <span class="brand-text">Insur<span class="accent">AI</span></span>
+        </div>
+        <div class="nav-links">
+            <a href="#predictor" class="nav-link">Predictor</a>
+            <a href="#insights" class="nav-link">Insights</a>
+            <a href="#leaderboard" class="nav-link">Models</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero" id="hero">
+        <div class="hero-content">
+            <div class="hero-badge">AI-Powered Prediction Engine</div>
+            <h1 class="hero-title">
+                Customer Insurance<br>
+                <span class="gradient-text">Purchase Predictor</span>
+            </h1>
+            <p class="hero-subtitle">
+                Harness the power of six machine learning algorithms to predict insurance
+                buying behavior with industry-leading accuracy. Optimize your marketing
+                strategy and reduce acquisition costs by up to 71%.
+            </p>
+            <div class="hero-stats">
+                <div class="stat-card">
+                    <span class="stat-value" id="heroAccuracy">82.5%</span>
+                    <span class="stat-label">Model Accuracy</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-value">71%</span>
+                    <span class="stat-label">Efficiency Gain</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-value">&#8377;11,900</span>
+                    <span class="stat-label">Acquisition Cost</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-value">6</span>
+                    <span class="stat-label">ML Algorithms</span>
+                </div>
+            </div>
+            <a href="#predictor" class="hero-cta">
+                Try the Predictor
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+            </a>
+        </div>
+    </header>
+
+    <!-- Predictor Section -->
+    <section class="section" id="predictor">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Predict Insurance Purchase</h2>
+                <p class="section-desc">Enter customer details to get an instant AI prediction</p>
+            </div>
+
+            <div class="predictor-grid">
+                <!-- Input Card -->
+                <div class="glass-card predictor-input">
+                    <div class="card-header">
+                        <div class="card-icon">📊</div>
+                        <h3>Customer Profile</h3>
+                    </div>
+
+                    <form id="predictForm">
+                        <div class="form-group">
+                            <label for="ageSlider">
+                                Age: <span class="age-value" id="ageDisplay">30</span> years
+                            </label>
+                            <input type="range" id="ageSlider" min="18" max="65" value="30" class="custom-slider">
+                            <div class="slider-labels">
+                                <span>18</span>
+                                <span>65</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="salaryInput">Estimated Annual Salary (INR)</label>
+                            <div class="input-wrapper">
+                                <span class="input-prefix">&#8377;</span>
+                                <input type="text" id="salaryInput" placeholder="6,00,000" class="text-input"
+                                    autocomplete="off">
+                            </div>
+                            <div class="salary-presets">
+                                <button type="button" class="preset-btn" data-salary="200000">&#8377;2L</button>
+                                <button type="button" class="preset-btn" data-salary="400000">&#8377;4L</button>
+                                <button type="button" class="preset-btn" data-salary="600000">&#8377;6L</button>
+                                <button type="button" class="preset-btn" data-salary="800000">&#8377;8L</button>
+                                <button type="button" class="preset-btn" data-salary="1200000">&#8377;12L</button>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="submit-btn" id="predictBtn">
+                            <span class="btn-text">Predict Now</span>
+                            <span class="btn-loader" style="display:none;">
+                                <span class="spinner"></span> Analyzing...
+                            </span>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Result Card -->
+                <div class="glass-card predictor-result" id="resultCard">
+                    <div class="result-placeholder" id="resultPlaceholder">
+                        <div class="placeholder-icon">🎯</div>
+                        <p>Enter customer details and click <strong>Predict Now</strong> to see the AI prediction</p>
+                    </div>
+
+                    <div class="result-content" id="resultContent" style="display:none;">
+                        <div class="result-label-wrapper">
+                            <div class="result-badge" id="resultBadge">YES</div>
+                            <div class="confidence-tag" id="confidenceTag">High Confidence</div>
+                        </div>
+
+                        <div class="gauge-container">
+                            <svg class="gauge" viewBox="0 0 200 120">
+                                <defs>
+                                    <linearGradient id="gaugeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                        <stop offset="0%" style="stop-color:#ef4444" />
+                                        <stop offset="50%" style="stop-color:#f59e0b" />
+                                        <stop offset="100%" style="stop-color:#22c55e" />
+                                    </linearGradient>
+                                </defs>
+                                <path d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke="rgba(255,255,255,0.1)"
+                                    stroke-width="12" stroke-linecap="round" />
+                                <path d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke="url(#gaugeGrad)"
+                                    stroke-width="12" stroke-linecap="round" id="gaugeArc" stroke-dasharray="0 251.2" />
+                                <text x="100" y="85" text-anchor="middle" fill="white" font-size="28" font-weight="700"
+                                    id="gaugeText">0%</text>
+                                <text x="100" y="105" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="11"
+                                    font-weight="400">Purchase Probability</text>
+                            </svg>
+                        </div>
+
+                        <div class="result-details">
+                            <div class="detail-row">
+                                <span class="detail-label">Customer Age</span>
+                                <span class="detail-value" id="detailAge">-</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Salary</span>
+                                <span class="detail-value" id="detailSalary">-</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Recommendation</span>
+                                <span class="detail-value" id="detailRec">-</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Insights Section -->
+    <section class="section section-dark" id="insights">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Key Insights</h2>
+                <p class="section-desc">Data-driven findings from 1,000 customer records</p>
+            </div>
+            <div class="insights-grid">
+                <div class="insight-card">
+                    <div class="insight-icon">💰</div>
+                    <h4>Salary is #1 Driver</h4>
+                    <p>Annual salary is the strongest predictor of insurance purchase behavior across all age groups.
+                    </p>
+                </div>
+                <div class="insight-card">
+                    <div class="insight-icon">&#127874;</div>
+                    <h4>Peak Age: 36-45</h4>
+                    <p>Middle-aged customers (36-45 years) show the highest conversion rate at 86.0%.</p>
+                </div>
+                <div class="insight-card">
+                    <div class="insight-icon">&#128201;</div>
+                    <h4>71% Cost Reduction</h4>
+                    <p>AI-driven targeting reduces customer acquisition costs from &#8377;41,500 to &#8377;11,900 per
+                        customer.</p>
+                </div>
+                <div class="insight-card">
+                    <div class="insight-icon">🤖</div>
+                    <h4>SVM Best Model</h4>
+                    <p>Support Vector Machine outperforms all other algorithms with 82.5% prediction accuracy.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Model Leaderboard -->
+    <section class="section" id="leaderboard">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Model Leaderboard</h2>
+                <p class="section-desc">Performance comparison of 6 machine learning algorithms</p>
+            </div>
+            <div class="glass-card leaderboard-card">
+                <div class="leaderboard-actions">
+                    <button class="action-btn" id="retrainBtn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path
+                                d="M21 2v6h-6M3 12A9 9 0 0 1 18.36 5.64L21 8M3 22v-6h6M21 12A9 9 0 0 0 5.64 18.36L3 16" />
+                        </svg>
+                        Retrain Model
+                    </button>
+                </div>
+                <div class="table-wrapper">
+                    <table class="leaderboard-table" id="leaderboardTable">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Model</th>
+                                <th>Test Acc</th>
+                                <th>CV Acc</th>
+                                <th>Precision</th>
+                                <th>Recall</th>
+                                <th>F1</th>
+                                <th>Train Time</th>
+                            </tr>
+                        </thead>
+                        <tbody id="leaderboardBody">
+                            <tr>
+                                <td colspan="8" class="loading-cell">
+                                    <span class="spinner"></span> Loading model data...
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="brand-icon">🛡️</span>
+                    <span class="brand-text">Insur<span class="accent">AI</span></span>
+                </div>
+                <p class="footer-text">Insurance Purchase Predictor - ML-powered customer analysis</p>
+                <p class="footer-copy">&copy; 2026 InsurAI. Built with scikit-learn & Flask.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast notification -->
+    <div class="toast" id="toast">
+        <span class="toast-icon"></span>
+        <span class="toast-message"></span>
+    </div>
+
+    <script src="/static/js/app.js"></script>
+</body>
+
+</html>
