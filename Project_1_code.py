@@ -34,10 +34,10 @@ from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_sc
 # ---------------------------------------------------------------------------
 # Configuration
 # ---------------------------------------------------------------------------
-N_CUSTOMERS = 1_000
+N_CUSTOMERS = 500
 TEST_SIZE = 0.2
 RANDOM_STATE = 42
-CV_FOLDS = 5
+CV_FOLDS = 3
 
 MODEL_DIR = Path(__file__).parent / "saved_model"
 MODEL_PATH = MODEL_DIR / "best_model.joblib"
